@@ -11,9 +11,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class LimitService {
     private static final Logger log = LoggerFactory.getLogger(LimitService.class);
-    private static final String CO2 = "CO2";
-    private static final String PM25 = "PM25";
-    private static final String PM10 = "PM10";
 
     private final FirebaseService firebaseService;
     public void checkLimitExceeded(final Sensor sensor) {
@@ -25,17 +22,24 @@ public class LimitService {
     }
 
     private void checkCO2Exceeded(Sensor sensor) {
-        if(sensor.getValues().get(CO2) > Limit.CO2) {
-            firebaseService.pushCO2Exceeded(sensor.getValues().get(CO2));
+        final Measurement measurement = sensor.getValues().get(MeasurementType.CO2);
+        if(measurement.getValue() > Limit.CO2.getValue()) {
+            firebaseService.pushCO2Exceeded(measurement.getValue());
         }
     }
 
     private void checkSMOGExceeded(Sensor sensor) {
-        if(sensor.getValues().get(PM25) > Limit.PM25) {
-            firebaseService.pushPM25Exceeded(sensor.getValues().get(PM25));
+        Double pm1Value = sensor.getValues().get(MeasurementType.PM1).getValue();
+        if(pm1Value > Limit.PM1.getValue()) {
+            firebaseService.pushPM1Exceeded(pm1Value);
         }
-        if(sensor.getValues().get(PM10) > Limit.PM10) {
-            firebaseService.pushPM10Exceeded(sensor.getValues().get(PM10));
+        Double pm25Value = sensor.getValues().get(MeasurementType.PM25).getValue();
+        if(pm25Value > Limit.PM25.getValue()) {
+            firebaseService.pushPM25Exceeded(pm25Value);
+        }
+        Double pm10Value = sensor.getValues().get(MeasurementType.PM10).getValue();
+        if(pm10Value > Limit.PM10.getValue()) {
+            firebaseService.pushPM10Exceeded(pm10Value);
         }
     }
 }

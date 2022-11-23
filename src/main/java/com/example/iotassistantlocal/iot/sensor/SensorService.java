@@ -14,7 +14,7 @@ public class SensorService {
     private final LimitService limitService;
     public void process(final Sensor sensor) {
         switch (sensor.getType()) {
-            case SMOG, CO2 -> processCheckLimit(sensor); // measurements that have to be checked
+            case SMOG, CO2 -> processCheckLimit(sensor); // measurements that have to be checked if limit has been exceeded
             case MOTION -> processMotion(); // immediate alert
             default -> processNormal(sensor); //humidity, temperature - just stats
         };
@@ -31,7 +31,7 @@ public class SensorService {
     }
 
     private void processCheckLimit(Sensor sensor) {
-        log.debug("ProcessMotion - motion detected!");
+        log.debug("Process check limit!");
         limitService.checkLimitExceeded(sensor);
         processNormal(sensor);
     }

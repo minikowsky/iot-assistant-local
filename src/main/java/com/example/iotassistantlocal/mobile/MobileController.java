@@ -9,14 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/mobile") //req: 192.168.0.99:8181/api/iot
 public class MobileController {
 
-    @PostMapping(value = "/light/on/{id}")
+    @PostMapping(value = "/light/{id}/on")
     public void switchOnLight(@PathVariable("id") Long id) {
 
     }
 
-    @PostMapping(value = "/light/off/{id}")
+    @PostMapping(value = "/light/{id}/off")
     public void switchOffLight(@PathVariable("id") Long id) {
 
     }
-
 }

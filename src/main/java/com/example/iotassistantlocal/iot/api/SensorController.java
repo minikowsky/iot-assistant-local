@@ -9,16 +9,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
-@RequestMapping("api/iot") //req: 192.168.0.99:8181/api/iot
+@RequestMapping("api/iot") //req: 192.168.0.99:8080/api/iot
 @RequiredArgsConstructor
 public class SensorController {
 
     private final SensorService sensorService;
 
     @PostMapping
-    public HttpStatus postData(@RequestBody final Sensor sensor) {
-        sensorService.process(sensor);
-        return HttpStatus.ACCEPTED;
+    public HttpStatus postData(@RequestBody @Valid final Sensor sensor) {
+        try {
+            sensorService.process(sensor);
+            return HttpStatus.OK;
+        } catch (Exception e) {
+            return HttpStatus.INTERNAL_SERVER_ERROR;
+        }
     }
 }

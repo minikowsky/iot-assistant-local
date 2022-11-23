@@ -1,22 +1,33 @@
 package com.example.iotassistantlocal.iot.sensor;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Sensor {
+    @NotNull
     private Long id;
-    private Map<String, Double> values;
+    @NotNull
+    @Valid
+    private Map<MeasurementType, Measurement> values;
+    @NotNull
     private String timestamp;
-    private SensorType type;
+    @NotNull
+    private String location;
+    @NotNull
+    @Valid
+    private SensorType sensorType;
 
     public Long getId() {
         return id;
     }
 
     public SensorType getType() {
-        return type;
+        return sensorType;
     }
 
-    public Map<String, Double> getValues() {
+    public Map<MeasurementType, Measurement> getValues() {
         return values;
     }
 
@@ -24,6 +35,13 @@ public class Sensor {
         return timestamp;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public SensorType getSensorType() {
+        return sensorType;
+    }
     public Sensor id(Long id) {
         this.id = id;
         return this;
@@ -34,23 +52,32 @@ public class Sensor {
         return this;
     }
 
-    public Sensor type(SensorType type) {
-        this.type = type;
+    public Sensor sensorType(SensorType sensorType) {
+        this.sensorType = sensorType;
         return this;
     }
 
-    public Sensor values(Map<String, Double> values) {
+    public Sensor location(String location) {
+        this.location = location;
+        return this;
+    }
+    public Sensor values(Map<MeasurementType, Measurement> values) {
         this.values = values;
         return this;
     }
 
     @Override
     public String toString() {
+        String valuesToString = values.keySet().stream()
+                .map(key -> key + "=" + values.get(key))
+                .collect(Collectors.joining(", ","{","}"));
         return "Sensor{" +
-                "id=" + id +
-                ", values=" + values +
-                ", timestamp='" + timestamp + '\'' +
-                ", type=" + type +
-                '}';
+                "\nid=" + id +
+                "\n, values=\n" + valuesToString +
+                "\n, timestamp='" + timestamp + '\'' +
+                "\n, type=" + sensorType +
+                "\n}\n";
     }
+
+
 }
