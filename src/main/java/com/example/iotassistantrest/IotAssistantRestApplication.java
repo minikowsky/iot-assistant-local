@@ -1,13 +1,13 @@
-package com.example.iotassistantlocal;
+package com.example.iotassistantrest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class IotAssistantLocalApplication {
+public class IotAssistantRestApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(IotAssistantLocalApplication.class, args);
+        SpringApplication.run(IotAssistantRestApplication.class, args);
     }
 
 }

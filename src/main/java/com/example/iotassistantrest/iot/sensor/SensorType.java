@@ -1,4 +1,4 @@
-package com.example.iotassistantlocal.iot.sensor;
+package com.example.iotassistantrest.iot.sensor;
 
 public enum SensorType {
     TEMPERATURE_HUMIDITY,

@@ -33,10 +33,10 @@
         </encoder>
     </appender>
 
-    <logger level="ERROR" name="com.example.iotassistantlocal" addivity="false">
+    <logger level="ERROR" name="com.example.iotassistantrest" addivity="false">
         <appender-ref ref="ERROR"/>
     </logger>
-    <logger level="DEBUG" name="com.example.iotassistantlocal" addivity="false">
+    <logger level="DEBUG" name="com.example.iotassistantrest" addivity="false">
         <appender-ref ref="DEBUG"/>
     </logger>
 

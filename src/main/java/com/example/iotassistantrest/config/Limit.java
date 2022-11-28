@@ -1,4 +1,4 @@
-package com.example.iotassistantlocal.config;
+package com.example.iotassistantrest.config;
 
 public enum Limit {
     CO2(100.00),

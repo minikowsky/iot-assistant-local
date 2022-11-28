@@ -1,6 +1,6 @@
-package com.example.iotassistantlocal.iot.sensor;
+package com.example.iotassistantrest.iot.sensor;
 
-import com.example.iotassistantlocal.firebase.FirebaseService;
+import com.example.iotassistantrest.firebase.FirebaseService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

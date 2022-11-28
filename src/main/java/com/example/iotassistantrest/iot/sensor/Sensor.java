@@ -1,7 +1,8 @@
-package com.example.iotassistantlocal.iot.sensor;
+package com.example.iotassistantrest.iot.sensor;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -11,13 +12,17 @@ public class Sensor {
     @NotNull
     @Valid
     private Map<MeasurementType, Measurement> values;
-    @NotNull
-    private String timestamp;
+
+    private Timestamp timestamp;
     @NotNull
     private String location;
     @NotNull
     @Valid
     private SensorType sensorType;
+
+    public Sensor() {
+        this.timestamp = new Timestamp(System.nanoTime());
+    }
 
     public Long getId() {
         return id;
@@ -31,7 +36,7 @@ public class Sensor {
         return values;
     }
 
-    public String getTimestamp() {
+    public Timestamp getTimestamp() {
         return timestamp;
     }
 
@@ -47,7 +52,7 @@ public class Sensor {
         return this;
     }
 
-    public Sensor timestamp(String timestamp) {
+    public Sensor timestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
         return this;
     }

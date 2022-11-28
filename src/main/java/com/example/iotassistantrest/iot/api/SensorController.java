@@ -1,7 +1,7 @@
-package com.example.iotassistantlocal.iot.api;
+package com.example.iotassistantrest.iot.api;
 
-import com.example.iotassistantlocal.iot.sensor.Sensor;
-import com.example.iotassistantlocal.iot.sensor.SensorService;
+import com.example.iotassistantrest.iot.sensor.Sensor;
+import com.example.iotassistantrest.iot.sensor.SensorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;

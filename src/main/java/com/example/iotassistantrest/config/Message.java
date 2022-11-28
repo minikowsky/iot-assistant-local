@@ -1,4 +1,4 @@
-package com.example.iotassistantlocal.config;
+package com.example.iotassistantrest.config;
 
 public class Message {
     public static String HIGH_LEVEL_C02 = "High C02 level in the air! The measurement was %s %s";

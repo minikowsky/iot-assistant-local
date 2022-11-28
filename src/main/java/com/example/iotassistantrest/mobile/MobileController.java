@@ -1,4 +1,4 @@
-package com.example.iotassistantlocal.mobile;
+package com.example.iotassistantrest.mobile;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
