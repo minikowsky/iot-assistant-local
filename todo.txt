@@ -1,0 +1,7 @@
+- detector: controller, model, service
+- fcm
+- actual limits
+- switch: httpService
+- check timestamp
+- docker
+

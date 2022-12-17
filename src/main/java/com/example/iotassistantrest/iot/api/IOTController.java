@@ -1,5 +1,7 @@
 package com.example.iotassistantrest.iot.api;
 
+import com.example.iotassistantrest.iot.detector.Detector;
+import com.example.iotassistantrest.iot.detector.DetectorService;
 import com.example.iotassistantrest.iot.sensor.Sensor;
 import com.example.iotassistantrest.iot.sensor.SensorService;
 import lombok.RequiredArgsConstructor;
@@ -14,14 +16,24 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("api/iot") //req: 192.168.0.99:8080/api/iot
 @RequiredArgsConstructor
-public class SensorController {
-
+public class IOTController {
     private final SensorService sensorService;
+    private final DetectorService detectorService;
 
-    @PostMapping
+    @PostMapping("sensor")
     public HttpStatus postData(@RequestBody @Valid final Sensor sensor) {
         try {
             sensorService.process(sensor);
+            return HttpStatus.OK;
+        } catch (Exception e) {
+            return HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+    }
+
+    @PostMapping("detector")
+    public HttpStatus handleDetection(@RequestBody @Valid final Detector detector) {
+        try {
+            detectorService.process(detector);
             return HttpStatus.OK;
         } catch (Exception e) {
             return HttpStatus.INTERNAL_SERVER_ERROR;
