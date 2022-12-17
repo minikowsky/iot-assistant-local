@@ -31,5 +31,4 @@ public class SensorService {
         limitService.checkLimitExceeded(sensor);
         processNormal(sensor);
     }
-
 }
