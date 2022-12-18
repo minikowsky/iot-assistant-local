@@ -5,27 +5,36 @@ import com.example.iotassistantrest.firebase.FirebaseService;
 import com.example.iotassistantrest.iot.sensor.MeasurementType;
 import com.example.iotassistantrest.iot.sensor.Sensor;
 import com.example.iotassistantrest.limit.lastpush.LastPushService;
-import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
 public class LimitService {
     private static final Logger log = LoggerFactory.getLogger(LimitService.class);
 
     private final FirebaseService firebaseService;
     private final LastPushService lastPushService;
-    @Value(value = "${push.level-exceeded.pm1}")
+
     private final long pushPM1;
-    @Value(value = "${push.level-exceeded.pm25}")
     private final long pushPM25;
-    @Value(value = "${push.level-exceeded.pm10}")
     private final long pushPM10;
-    @Value(value = "${push.level-exceeded.co2}")
     private final long pushCO2;
+
+    public LimitService(FirebaseService firebaseService,
+                        LastPushService lastPushService,
+                        @Value(value = "${push.level-exceeded.pm1}") long pushPM1,
+                        @Value(value = "${push.level-exceeded.pm25}") long pushPM25,
+                        @Value(value = "${push.level-exceeded.pm10}") long pushPM10,
+                        @Value(value = "${push.level-exceeded.co2}") long pushCO2) {
+        this.firebaseService = firebaseService;
+        this.lastPushService = lastPushService;
+        this.pushPM1 = pushPM1;
+        this.pushPM25 = pushPM25;
+        this.pushPM10 = pushPM10;
+        this.pushCO2 = pushCO2;
+    }
 
     public void checkLimitExceeded(final Sensor sensor) {
         switch (sensor.getSensorType()) {

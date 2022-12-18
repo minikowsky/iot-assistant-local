@@ -19,12 +19,14 @@ class FirebaseFCMHttpClientService {
     private static final Logger log = LoggerFactory.getLogger(FirebaseFCMHttpClientService.class);
 
     private static final String FCM_URL = "https://fcm.googleapis.com/fcm/send";
-    private static final String KEY = "AAAA2dWLpSQ:APA91bGJrOvLvOjkVlpfO7ytGEVD7nvZFt4xmwDXbbioAFVU1ZgbFddLGjX3eiUI6wPLGPoq-426n4IKgvFD_kcyj-peVAoIRPkx49DyH5XItVOI5jJz_SrV6pkoRfiBo72B5Gl6vPks";
 
+    private final String fcmKey;
     private final String localServerId;
 
-    FirebaseFCMHttpClientService(@Value(value = "${local-server.id}") final String localServerId) {
+    FirebaseFCMHttpClientService(@Value(value = "${local-server.id}") final String localServerId,
+                                 @Value(value = "${local-server.fcm-key}") final String fcmKey) {
         this.localServerId = localServerId;
+        this.fcmKey = fcmKey;
         log.info("LocalServerId = " + this.localServerId);
     }
     void push(String message) {
@@ -34,10 +36,11 @@ class FirebaseFCMHttpClientService {
                                                                         .body(message)
                                                                         .title("IOT Assistant alert")
                                                     ));
+        log.info(json);
         try {
             HttpClient httpClient = HttpClient.newHttpClient();
             HttpRequest httpRequest = HttpRequest.newBuilder()
-                    .headers("Content-Type","application/json", "Authorization", "key="+KEY)
+                    .headers("Content-Type","application/json", "Authorization", "key="+ fcmKey)
                     .uri(new URI(FCM_URL))
                     .POST( HttpRequest.BodyPublishers.ofString(json))
                     .build();

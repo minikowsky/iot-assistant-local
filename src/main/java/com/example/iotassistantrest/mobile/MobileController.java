@@ -1,10 +1,10 @@
 package com.example.iotassistantrest.mobile;
 
+import com.example.iotassistantrest.iot.detector.alarm.Alarm;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/mobile") //req: 192.168.0.99:8181/api/iot
@@ -21,5 +21,15 @@ public class MobileController {
     @PostMapping(value = "/light/{id}/off")
     public void switchOffLight(@PathVariable("id") Long id) {
         service.switchOffLight(id);
+    }
+
+    @PostMapping(value = "/alarm/{mode}")
+    public void switchAlarm(@PathVariable("mode") String mode) {
+        service.switchAlarm(mode);
+    }
+
+    @GetMapping(value = "/alarm")
+    public Optional<Alarm> switchAlarm() {
+        return service.getAlarm();
     }
 }

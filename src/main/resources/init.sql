@@ -1,0 +1,1 @@
+merge into ALARM KEY(ID) values (1,'OFF');

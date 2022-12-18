@@ -17,12 +17,10 @@ public abstract class Device {
         this.timestamp = new Timestamp(System.currentTimeMillis());
     }
 
-
     public Device id(Long id) {
         this.id = id;
         return this;
     }
-
 
     public Device location(String location) {
         this.location = location;

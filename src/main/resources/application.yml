@@ -1,5 +1,6 @@
 local-server:
   id: e94c373e-5d26-11ed-9b6a-0242ac120002
+  fcm-key: ENC(HkIKnfSHWIvRCjpy2vVkkrWHz5gvSA4NqWGe9bgRhp5X+zZ0GiceAE6LNSx9LNzCUr0CfQAn/vE/QivvAXlZwxatWw0wBCPZOzndlJoNa1sRa/ie1OF8DYEX954bwmQSAhaStDFMk0hXRI/49LTRUBLI5ZH6csqT9pC2qhyKmuOOXkMzcSU45fw778hvC52tA95qF2+Q0ZxZAnJ3GVJ4CvIrdqw82cfc)
   #password: ENC(SJiiNjl5qoduOrJwQoL6RECEn7FkM/oI)
 
 push: # time between sending alert messages
@@ -14,7 +15,7 @@ push: # time between sending alert messages
 spring:
   datasource:
     driver-class-name: org.h2.Driver
-    password: ENC(XmsTMnBvPVPHhaI1OkUBJQ==)
-    username: ENC(XmsTMnBvPVPHhaI1OkUBJQ==)
+    password: ENC(/UQrmWAJ/BKXCGGogAgl/A==)
+    username: ENC(/UQrmWAJ/BKXCGGogAgl/A==)
     embedded-database-connection: h2
-    url: jdbc:h2:~/data
+    url: "jdbc:h2:./db/data;INIT=RUNSCRIPT FROM 'classpath:create.sql'\\;RUNSCRIPT from 'classpath:init.sql';"
