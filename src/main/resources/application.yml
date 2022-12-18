@@ -1,3 +1,20 @@
 local-server:
   id: e94c373e-5d26-11ed-9b6a-0242ac120002
   #password: ENC(SJiiNjl5qoduOrJwQoL6RECEn7FkM/oI)
+
+push: # time between sending alert messages
+  level-exceeded:
+    pm1: 60
+    pm25: 60
+    pm10: 60
+    co2: 30
+  detection:
+    motion: 10
+
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    password: ENC(XmsTMnBvPVPHhaI1OkUBJQ==)
+    username: ENC(XmsTMnBvPVPHhaI1OkUBJQ==)
+    embedded-database-connection: h2
+    url: jdbc:h2:~/data

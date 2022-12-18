@@ -10,8 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalTime;
-
 @Service
 @RequiredArgsConstructor
 public class FirebaseService {
@@ -38,7 +36,7 @@ public class FirebaseService {
         log.info("Push detection: " + message + " - has been send");
     }
 
-    public void pushLevelExceeded(Double value, MeasurementType type) {
+    public void pushLevelExceeded(MeasurementType type, Double value) {
         String message = switch(type){
             case PM1 -> Message.getMessage(Message.HIGH_LEVEL_PM1, value, Unit.MICROGRAMS_PER_CUBIC_METER.getSymbol());
             case PM25 -> Message.getMessage(Message.HIGH_LEVEL_PM25, value, Unit.MICROGRAMS_PER_CUBIC_METER.getSymbol());
