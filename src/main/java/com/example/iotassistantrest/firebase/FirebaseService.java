@@ -19,11 +19,11 @@ public class FirebaseService {
 
     public void updateValues(Sensor sensor) {
         log.info("send actual data");
-        dbService.sendUpdateRequest(sensor);
+        dbService.sendCurrentData(sensor);
 
         if(sensor.getTimestamp().toLocalDateTime().getMinute()==0) {
             log.info("send historical data, time" + sensor.getTimestamp().toLocalDateTime());
-            dbService.sendPostRequest(sensor);
+            dbService.sendHistoricalData(sensor);
         }
     }
 

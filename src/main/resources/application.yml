@@ -1,6 +1,6 @@
 local-server:
   id: e94c373e-5d26-11ed-9b6a-0242ac120002
-  fcm-key: ENC(HkIKnfSHWIvRCjpy2vVkkrWHz5gvSA4NqWGe9bgRhp5X+zZ0GiceAE6LNSx9LNzCUr0CfQAn/vE/QivvAXlZwxatWw0wBCPZOzndlJoNa1sRa/ie1OF8DYEX954bwmQSAhaStDFMk0hXRI/49LTRUBLI5ZH6csqT9pC2qhyKmuOOXkMzcSU45fw778hvC52tA95qF2+Q0ZxZAnJ3GVJ4CvIrdqw82cfc)
+  fcm-key: ENC(ZLdk6wIBtQ9vd1RIrvAoVOkZN3N3eWeDE3uXGzqm6UjZkQFSvS7w2emEWc73wSR01rRI92p1B1zsbXUucBgBiEYE0JJlBAoZS9g5bRC6FCVb9bKNOrjqcqm0Wgh/yrF7H0pBLKU/Bx6MjJY80IKuRhZSoi/z1M2dhJmaAOFbIgVcE9wWdO8AjlrNh3g1p8YrmG7QG4XPoddjpsKPDOm2+KK23A8xs7yB)
   #password: ENC(SJiiNjl5qoduOrJwQoL6RECEn7FkM/oI)
 
 push: # time between sending alert messages
@@ -10,7 +10,7 @@ push: # time between sending alert messages
     pm10: 60
     co2: 30
   detection:
-    motion: 10
+    motion: 0
 
 spring:
   datasource:
@@ -18,4 +18,4 @@ spring:
     password: ENC(/UQrmWAJ/BKXCGGogAgl/A==)
     username: ENC(/UQrmWAJ/BKXCGGogAgl/A==)
     embedded-database-connection: h2
-    url: "jdbc:h2:./db/data;INIT=RUNSCRIPT FROM 'classpath:create.sql'\\;RUNSCRIPT from 'classpath:init.sql';"
+    url: "jdbc:h2:./db/data;INIT=RUNSCRIPT FROM 'classpath:create.sql';"

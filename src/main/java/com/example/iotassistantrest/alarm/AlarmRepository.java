@@ -1,4 +1,4 @@
-package com.example.iotassistantrest.iot.detector.alarm;
+package com.example.iotassistantrest.alarm;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

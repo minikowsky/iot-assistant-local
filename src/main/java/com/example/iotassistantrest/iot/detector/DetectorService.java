@@ -1,7 +1,7 @@
 package com.example.iotassistantrest.iot.detector;
 
 import com.example.iotassistantrest.firebase.FirebaseService;
-import com.example.iotassistantrest.iot.detector.alarm.AlarmService;
+import com.example.iotassistantrest.alarm.AlarmService;
 import com.example.iotassistantrest.iot.sensor.SensorService;
 import com.example.iotassistantrest.limit.lastpush.LastPushService;
 import org.slf4j.Logger;

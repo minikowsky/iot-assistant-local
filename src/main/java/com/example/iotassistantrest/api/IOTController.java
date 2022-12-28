@@ -1,4 +1,4 @@
-package com.example.iotassistantrest.iot.api;
+package com.example.iotassistantrest.api;
 
 import com.example.iotassistantrest.iot.detector.Detector;
 import com.example.iotassistantrest.iot.detector.DetectorService;

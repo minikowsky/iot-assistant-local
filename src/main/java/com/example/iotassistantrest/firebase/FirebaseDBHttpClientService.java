@@ -27,7 +27,7 @@ class FirebaseDBHttpClientService {
         log.info("LocalServerId = " + this.localServerId);
     }
 
-    void sendUpdateRequest(Sensor sensor) {
+    void sendCurrentData(Sensor sensor) {
         String json = JSONUtils.objectToJson(sensor);
         try {
             String uri = String.format(
@@ -51,7 +51,7 @@ class FirebaseDBHttpClientService {
         }
     }
 
-    void sendPostRequest(Sensor sensor) {
+    void sendHistoricalData(Sensor sensor) {
         String json = JSONUtils.objectToJson(sensor);
         try {
             String uri = String.format(

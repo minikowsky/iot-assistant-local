@@ -1,4 +1,4 @@
-package com.example.iotassistantrest.iot.detector.alarm;
+package com.example.iotassistantrest.alarm;
 
 import lombok.Data;
 
@@ -15,4 +15,14 @@ public class Alarm {
 
     @Column(name = "MODE")
     private String mode;
+
+    public Alarm id(Integer id) {
+        this.id = id;
+        return this;
+    }
+
+    public Alarm mode(String mode) {
+        this.mode = mode;
+        return this;
+    }
 }
