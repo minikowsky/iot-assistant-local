@@ -48,7 +48,7 @@ public class LimitService {
         Double value = sensor.getValues().get(MeasurementType.CO2).getValue();
         if (value > Limit.CO2.getValue()) {
             if (lastPushService.shouldPush(MeasurementType.CO2.toString(), pushCO2)) {
-                firebaseService.pushLevelExceeded(MeasurementType.CO2, value);
+                firebaseService.pushLevelExceeded(sensor.getId(), MeasurementType.CO2, value);
             }
         }
     }
@@ -57,19 +57,19 @@ public class LimitService {
         Double pm1Value = sensor.getValues().get(MeasurementType.PM1).getValue();
         if (pm1Value > Limit.PM1.getValue()) {
             if (lastPushService.shouldPush(MeasurementType.PM1.toString(), pushPM1)) {
-                firebaseService.pushLevelExceeded(MeasurementType.PM1,pm1Value);
+                firebaseService.pushLevelExceeded(sensor.getId(), MeasurementType.PM1,pm1Value);
             }
         }
         Double pm25Value = sensor.getValues().get(MeasurementType.PM25).getValue();
         if (pm25Value > Limit.PM25.getValue()) {
             if (lastPushService.shouldPush(MeasurementType.PM25.toString(), pushPM25)) {
-                firebaseService.pushLevelExceeded(MeasurementType.PM25, pm25Value);
+                firebaseService.pushLevelExceeded(sensor.getId(), MeasurementType.PM25, pm25Value);
             }
         }
         Double pm10Value = sensor.getValues().get(MeasurementType.PM10).getValue();
         if (pm10Value > Limit.PM10.getValue()) {
             if (lastPushService.shouldPush(MeasurementType.PM10.toString(), pushPM10)) {
-                firebaseService.pushLevelExceeded(MeasurementType.PM10, pm10Value);
+                firebaseService.pushLevelExceeded(sensor.getId(), MeasurementType.PM10, pm10Value);
             }
         }
     }

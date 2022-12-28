@@ -24,7 +24,10 @@ public class SwitchService {
     }
 
     public String findDevice(String id) {
-        return serviceSonoff.findDevice(id);
+        log.info("Sonoff id : " + id);
+        String addr = serviceSonoff.findDevice(id);
+        log.info("Addr" + addr);
+        return addr;
     }
     public void switchAlarm(String mode) {
         if(Objects.equals(mode, "on") || Objects.equals(mode, "off")) {

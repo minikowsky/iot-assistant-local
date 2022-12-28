@@ -1,5 +1,7 @@
 package com.example.iotassistantrest.firebase;
 
+import com.example.iotassistantrest.config.Lang;
+import com.example.iotassistantrest.firebase.body.Data;
 import com.example.iotassistantrest.firebase.body.MessageBody;
 import com.example.iotassistantrest.firebase.body.Notification;
 import com.example.iotassistantrest.utils.JSONUtils;
@@ -13,6 +15,7 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Map;
 
 @Service
 class FirebaseFCMHttpClientService {
@@ -29,13 +32,19 @@ class FirebaseFCMHttpClientService {
         this.fcmKey = fcmKey;
         log.info("LocalServerId = " + this.localServerId);
     }
-    void push(String message) {
+
+    void push(Map<Lang,String> messages, Long sensorId) {
+        pushMessage(messages.get(Lang.EN), Lang.EN.toString(), sensorId);
+        pushMessage(messages.get(Lang.PL), Lang.PL.toString(), sensorId);
+    }
+
+    void pushMessage(String message, String lang, Long sensorId) {
         String json = JSONUtils.objectToJson(new MessageBody()
-                                                    .to("/topics/"+localServerId)
+                                                    .to("/topics/"+ localServerId + "_" + lang)
                                                     .notification(new Notification()
                                                                         .body(message)
-                                                                        .title("IOT Assistant alert")
-                                                    ));
+                                                                        .title("IOT Assistant"))
+                .data(new Data().sensorId(sensorId)));
         log.info(json);
         try {
             HttpClient httpClient = HttpClient.newHttpClient();

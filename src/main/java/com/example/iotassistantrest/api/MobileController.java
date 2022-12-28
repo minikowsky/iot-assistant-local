@@ -32,7 +32,7 @@ public class MobileController {
     }
 
     @GetMapping(value = "/alarm")
-    public boolean switchAlarm() {
+    public boolean getAlarm() {
         return service.getAlarm();
     }
 }

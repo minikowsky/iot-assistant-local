@@ -1,5 +1,6 @@
 package com.example.iotassistantrest.firebase;
 
+import com.example.iotassistantrest.config.Lang;
 import com.example.iotassistantrest.config.Message;
 import com.example.iotassistantrest.config.Unit;
 import com.example.iotassistantrest.iot.detector.DetectorType;
@@ -9,6 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -28,23 +32,32 @@ public class FirebaseService {
     }
 
     public void pushDetection(DetectorType type, String location) {
-        String message = switch(type) {
+        Map<Lang,String> messages = switch(type) {
             case MOTION -> Message.getMessage(Message.MOTION_DETECTED, location);
-            default -> "Default message - detector type unknown";
+            default -> null;
         };
-        fcmService.push(message);
-        log.info("Push detection: " + message + " - has been send");
+        if(messages != null) {
+            fcmService.push(messages, null);
+            log.info("Push detection: " + messages.get(Lang.EN) + " - has been send");
+        } else {
+            log.error("There is no messages!");
+        }
+
     }
 
-    public void pushLevelExceeded(MeasurementType type, Double value) {
-        String message = switch(type){
+    public void pushLevelExceeded(Long sensorId, MeasurementType type, Double value) {
+        Map<Lang,String> messages = switch(type){
             case PM1 -> Message.getMessage(Message.HIGH_LEVEL_PM1, value, Unit.MICROGRAMS_PER_CUBIC_METER.getSymbol());
             case PM25 -> Message.getMessage(Message.HIGH_LEVEL_PM25, value, Unit.MICROGRAMS_PER_CUBIC_METER.getSymbol());
             case PM10 -> Message.getMessage(Message.HIGH_LEVEL_PM10, value, Unit.MICROGRAMS_PER_CUBIC_METER.getSymbol());
             case CO2 -> Message.getMessage(Message.HIGH_LEVEL_C02, value, Unit.PARTS_PER_MILLION.getSymbol());
-            default -> "Default message - measurement type unknown";
+            default -> null;
         };
-        fcmService.push(message);
-        log.info("Push level exceeded: " + message + " - has been send");
+        if(messages!= null) {
+            fcmService.push(messages, sensorId);
+            log.info("Push level exceeded: " + messages.get(Lang.EN) + " - has been send");
+        } else {
+            log.error("There is no messages!");
+        }
     }
 }

@@ -17,11 +17,11 @@ public class AlarmService {
     public boolean isAlarmOn() {
         Optional<Alarm> alarm = repository.findById(1);
         if(alarm.isEmpty()) {
-            Alarm newAlarm = new Alarm().id(1).mode("OFF"); // if db is empty
+            Alarm newAlarm = new Alarm().id(1).mode("off"); // if db is empty
             repository.save(newAlarm);
             return false;
         }
-        return alarm.get().getMode().equals("ON");
+        return alarm.get().getMode().equals("on");
     }
 
     public void switchAlarm(String mode) {

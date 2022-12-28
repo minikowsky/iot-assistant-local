@@ -26,7 +26,8 @@ public class SonoffService {
     }
 
     public void switchLight(String devAddr, String mode) {
-        String json = "\"{\\\"data\\\":{\\\"switch\\\":\\\"" + mode + "\\\"}}\"";
+        String json = "{\"data\":{\"switch\":\"" + mode + "\"}}";
+        log.info(json);
         try {
             String uri = String.format(
                     SONOFF_URL,
