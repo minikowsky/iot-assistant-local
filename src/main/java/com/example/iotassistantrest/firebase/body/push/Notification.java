@@ -1,4 +1,4 @@
-package com.example.iotassistantrest.firebase.body;
+package com.example.iotassistantrest.firebase.body.push;
 
 import lombok.Data;
 

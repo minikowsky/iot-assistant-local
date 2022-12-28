@@ -1,9 +1,9 @@
 package com.example.iotassistantrest.firebase;
 
 import com.example.iotassistantrest.config.Lang;
-import com.example.iotassistantrest.firebase.body.Data;
-import com.example.iotassistantrest.firebase.body.MessageBody;
-import com.example.iotassistantrest.firebase.body.Notification;
+import com.example.iotassistantrest.firebase.body.push.Data;
+import com.example.iotassistantrest.firebase.body.push.MessageBody;
+import com.example.iotassistantrest.firebase.body.push.Notification;
 import com.example.iotassistantrest.utils.JSONUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

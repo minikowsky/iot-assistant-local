@@ -1,4 +1,4 @@
-package com.example.iotassistantrest.firebase.body;
+package com.example.iotassistantrest.firebase.body.push;
 
 import lombok.Data;
 
@@ -6,7 +6,7 @@ import lombok.Data;
 public class MessageBody {
     private String to;
     private Notification notification;
-    private com.example.iotassistantrest.firebase.body.Data data;
+    private com.example.iotassistantrest.firebase.body.push.Data data;
 
     public MessageBody to(String to) {
         this.to = to;
@@ -18,7 +18,7 @@ public class MessageBody {
         return this;
     }
 
-    public MessageBody data(com.example.iotassistantrest.firebase.body.Data data) {
+    public MessageBody data(com.example.iotassistantrest.firebase.body.push.Data data) {
         this.data = data;
         return this;
     }

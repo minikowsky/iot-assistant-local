@@ -1,5 +1,6 @@
 package com.example.iotassistantrest.firebase;
 
+import com.example.iotassistantrest.firebase.body.data.Device;
 import com.example.iotassistantrest.iot.sensor.Sensor;
 import com.example.iotassistantrest.utils.JSONUtils;
 import org.slf4j.Logger;
@@ -17,7 +18,7 @@ import java.net.http.HttpResponse;
 class FirebaseDBHttpClientService {
     private static final Logger log = LoggerFactory.getLogger(FirebaseDBHttpClientService.class);
     public static final String FIREBASE_DATABASE_URL = "https://iot-assistant-81581-default-rtdb.europe-west1.firebasedatabase.app/localServers/%s/%s";
-    public static final String FIREBASE_CURRENT = FIREBASE_DATABASE_URL + "/current.json";
+    public static final String FIREBASE_CURRENT = FIREBASE_DATABASE_URL + ".json";
     public static final String FIREBASE_HISTORICAL = FIREBASE_DATABASE_URL + "/historical/%s.json";
 
     private final String localServerId;
@@ -28,7 +29,7 @@ class FirebaseDBHttpClientService {
     }
 
     void sendCurrentData(Sensor sensor) {
-        String json = JSONUtils.objectToJson(sensor);
+        String json = JSONUtils.objectToJson(Device.current(sensor));
         try {
             String uri = String.format(
                     FIREBASE_CURRENT,
@@ -52,7 +53,7 @@ class FirebaseDBHttpClientService {
     }
 
     void sendHistoricalData(Sensor sensor) {
-        String json = JSONUtils.objectToJson(sensor);
+        String json = JSONUtils.objectToJson(sensor.getValues());
         try {
             String uri = String.format(
                     FIREBASE_HISTORICAL,

@@ -28,7 +28,7 @@ public class FirebaseService {
         if(sensor.getTimestamp().toLocalDateTime().getMinute()==0) {
             log.info("send historical data, time" + sensor.getTimestamp().toLocalDateTime());
             dbService.sendHistoricalData(sensor);
-        }
+       }
     }
 
     public void pushDetection(DetectorType type, String location) {
