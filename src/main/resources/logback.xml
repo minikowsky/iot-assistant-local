@@ -5,6 +5,40 @@
         </encoder>
     </appender>
 
+    <appender name="DEVICE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+        <file>logs/iot-assistant-rest-device.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>logs/iot-assistant-rest-device.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <!-- keep 30 days' worth of history capped at 3GB total size -->
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>3GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="CLOUD" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+        <file>logs/iot-assistant-rest-cloud.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>logs/iot-assistant-rest-cloud.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <!-- keep 30 days' worth of history capped at 3GB total size -->
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>3GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
     <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>ERROR</level>
@@ -39,11 +73,11 @@
         </encoder>
     </appender>
 
-    <logger level="ERROR" name="com.example.iotassistantrest" addivity="false">
-        <appender-ref ref="ERROR"/>
+    <logger level="ERROR" name="com.example.iotassistantrest.firebase" addivity="false">
+        <appender-ref ref="CLOUD"/>
     </logger>
-    <logger level="DEBUG" name="com.example.iotassistantrest" addivity="false">
-        <appender-ref ref="DEBUG"/>
+    <logger level="DEBUG" name="com.example.iotassistantrest.iot" addivity="false">
+        <appender-ref ref="DEVICE"/>
     </logger>
 
     <root level="ERROR" addivity="false">
