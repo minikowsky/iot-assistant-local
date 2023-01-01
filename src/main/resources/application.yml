@@ -10,7 +10,7 @@ push: # time between sending alert messages
     pm10: 60
     co2: 30
   detection:
-    motion: 0
+    motion: 5
 
 spring:
   datasource:

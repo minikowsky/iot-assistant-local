@@ -3,6 +3,7 @@ package com.example.iotassistantrest.firebase;
 import com.example.iotassistantrest.config.Lang;
 import com.example.iotassistantrest.config.Message;
 import com.example.iotassistantrest.config.Unit;
+import com.example.iotassistantrest.firebase.body.data.Config;
 import com.example.iotassistantrest.iot.detector.DetectorType;
 import com.example.iotassistantrest.iot.sensor.MeasurementType;
 import com.example.iotassistantrest.iot.sensor.Sensor;
@@ -20,6 +21,10 @@ public class FirebaseService {
     private static final Logger log = LoggerFactory.getLogger(FirebaseService.class);
     final FirebaseDBHttpClientService dbService;
     final FirebaseFCMHttpClientService fcmService;
+
+    public void updateConfig(String ip, String ssid) {
+        dbService.sendServerConfig(new Config().ip(ip).ssid(ssid));
+    }
 
     public void updateValues(Sensor sensor) {
         log.info("send actual data");

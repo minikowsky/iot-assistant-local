@@ -1,5 +1,6 @@
 package com.example.iotassistantrest.firebase;
 
+import com.example.iotassistantrest.firebase.body.data.Config;
 import com.example.iotassistantrest.firebase.body.data.Device;
 import com.example.iotassistantrest.iot.sensor.Sensor;
 import com.example.iotassistantrest.utils.JSONUtils;
@@ -17,9 +18,10 @@ import java.net.http.HttpResponse;
 @Service
 class FirebaseDBHttpClientService {
     private static final Logger log = LoggerFactory.getLogger(FirebaseDBHttpClientService.class);
-    public static final String FIREBASE_DATABASE_URL = "https://iot-assistant-81581-default-rtdb.europe-west1.firebasedatabase.app/localServers/%s/%s";
-    public static final String FIREBASE_CURRENT = FIREBASE_DATABASE_URL + ".json";
-    public static final String FIREBASE_HISTORICAL = FIREBASE_DATABASE_URL + "/historical/%s.json";
+    private static final String FIREBASE_DATABASE_URL = "https://iot-assistant-81581-default-rtdb.europe-west1.firebasedatabase.app/localServers/%s";
+    private static final String FIREBASE_CONFIG = FIREBASE_DATABASE_URL + "/config.json";
+    private static final String FIREBASE_CURRENT = FIREBASE_DATABASE_URL + "/sensors/%s.json";
+    private static final String FIREBASE_HISTORICAL = FIREBASE_DATABASE_URL + "/sensors/%s/historical/%s.json";
 
     private final String localServerId;
 
@@ -29,43 +31,45 @@ class FirebaseDBHttpClientService {
     }
 
     void sendCurrentData(Sensor sensor) {
+        String uri = String.format(
+                FIREBASE_CURRENT,
+                localServerId,
+                sensor.getId());
+
         String json = JSONUtils.objectToJson(Device.current(sensor));
-        try {
-            String uri = String.format(
-                    FIREBASE_CURRENT,
-                    localServerId,
-                    sensor.getId());
 
-            HttpClient httpClient = HttpClient.newHttpClient();
-            HttpRequest httpRequest = HttpRequest.newBuilder()
-                    .header("Content-Type","application/json")
-                    .uri(new URI(uri))
-                    .method("PATCH", HttpRequest.BodyPublishers.ofString(json))
-                    .build();
-
-            httpClient.sendAsync(httpRequest, HttpResponse.BodyHandlers.ofString())
-                    .thenApply(HttpResponse::body)
-                    .thenAccept(log::debug)
-                    .join();
-        } catch (URISyntaxException e) {
-            log.error(e.getMessage());
-        }
+        send(uri, json);
     }
 
     void sendHistoricalData(Sensor sensor) {
+        String uri = String.format(
+                FIREBASE_HISTORICAL,
+                localServerId,
+                sensor.getId(),
+                sensor.getTimestamp().getTime());
+
         String json = JSONUtils.objectToJson(sensor.getValues());
+
+        send(uri, json);
+    }
+
+    void sendServerConfig(Config config) {
+        String uri = String.format(
+                FIREBASE_CONFIG,
+                localServerId);
+
+        String json = JSONUtils.objectToJson(config);
+
+        send(uri, json);
+    }
+
+    private void send(String uri, String body) {
         try {
-            String uri = String.format(
-                    FIREBASE_HISTORICAL,
-                    localServerId,
-                    sensor.getId(),
-                    sensor.getTimestamp().getTime());
-            log.info(uri);
             HttpClient httpClient = HttpClient.newHttpClient();
             HttpRequest httpRequest = HttpRequest.newBuilder()
-                    .header("Content-Type","application/json")
+                    .header("Content-Type", "application/json")
                     .uri(new URI(uri))
-                    .method("PATCH", HttpRequest.BodyPublishers.ofString(json))
+                    .method("PATCH", HttpRequest.BodyPublishers.ofString(body))
                     .build();
 
             httpClient.sendAsync(httpRequest, HttpResponse.BodyHandlers.ofString())
