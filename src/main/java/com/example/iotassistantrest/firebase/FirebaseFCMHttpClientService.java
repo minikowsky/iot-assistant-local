@@ -1,6 +1,6 @@
 package com.example.iotassistantrest.firebase;
 
-import com.example.iotassistantrest.config.Lang;
+import com.example.iotassistantrest.iot.config.Lang;
 import com.example.iotassistantrest.firebase.body.push.Data;
 import com.example.iotassistantrest.firebase.body.push.MessageBody;
 import com.example.iotassistantrest.firebase.body.push.Notification;
@@ -44,7 +44,7 @@ class FirebaseFCMHttpClientService {
                                                     .notification(new Notification()
                                                                         .body(message)
                                                                         .title("IOT Assistant"))
-                .data(new Data().sensorId(sensorId)));
+                .data(new Data().sensorId(sensorId).localServerId(localServerId)));
         log.info(json);
         try {
             HttpClient httpClient = HttpClient.newHttpClient();

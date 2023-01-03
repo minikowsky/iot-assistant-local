@@ -4,11 +4,11 @@ import lombok.Data;
 
 @Data
 public class Config {
-    private String ip;
+    private String localIP;
     private String ssid;
 
-    public Config ip(String ip) {
-        this.ip = ip;
+    public Config localIP(String localIP) {
+        this.localIP = localIP;
         return this;
     }
 

@@ -1,4 +1,4 @@
-package com.example.iotassistantrest.config;
+package com.example.iotassistantrest.iot.config;
 
 import java.util.Map;
 

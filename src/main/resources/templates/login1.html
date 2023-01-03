@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>IOT Assistant</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" type="text/css" media="all" href="../static/css/style.css" th:href="@{../static/css/style.css}" />
+    </head>
+
+    <body>
+        <h1>Login panel</h1>
+        <object data="../static/images/logo.svg" width="100"></object>
+        <!--<div th:if="${param.error}">Invalid username or password.</div>
+        <div th:if="${param.logout}">You have been logged out.</div>-->
+        <form th:action="@{/login}" method="post">
+            <label for="localServerId">Server ID</label>:<input type="text" id="localServerId" name="localServerId" autofocus="autofocus" /> <br/>
+            <label for="password">Password</label>:<input type="text" id="password" name="password" /> <br/>
+            <input type="submit" value="Log in">
+        </form>
+    </body>
+</html>

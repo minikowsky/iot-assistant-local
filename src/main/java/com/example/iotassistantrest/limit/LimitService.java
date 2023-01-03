@@ -1,6 +1,6 @@
 package com.example.iotassistantrest.limit;
 
-import com.example.iotassistantrest.config.Limit;
+import com.example.iotassistantrest.iot.config.Limit;
 import com.example.iotassistantrest.firebase.FirebaseService;
 import com.example.iotassistantrest.iot.sensor.MeasurementType;
 import com.example.iotassistantrest.iot.sensor.Sensor;

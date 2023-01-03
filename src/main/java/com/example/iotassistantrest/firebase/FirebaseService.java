@@ -1,8 +1,9 @@
 package com.example.iotassistantrest.firebase;
 
-import com.example.iotassistantrest.config.Lang;
-import com.example.iotassistantrest.config.Message;
-import com.example.iotassistantrest.config.Unit;
+import com.example.iotassistantrest.firebase.body.data.Switch;
+import com.example.iotassistantrest.iot.config.Lang;
+import com.example.iotassistantrest.iot.config.Message;
+import com.example.iotassistantrest.iot.config.Unit;
 import com.example.iotassistantrest.firebase.body.data.Config;
 import com.example.iotassistantrest.iot.detector.DetectorType;
 import com.example.iotassistantrest.iot.sensor.MeasurementType;
@@ -22,8 +23,24 @@ public class FirebaseService {
     final FirebaseDBHttpClientService dbService;
     final FirebaseFCMHttpClientService fcmService;
 
-    public void updateConfig(String ip, String ssid) {
-        dbService.sendServerConfig(new Config().ip(ip).ssid(ssid));
+    public void updateConfig(String localIP, String ssid) {
+        dbService.sendServerConfig(new Config().localIP(localIP).ssid(ssid));
+    }
+
+    public Config getConfig() {
+        return dbService.getConfig();
+    }
+
+    public Map<String,Switch> findAllSwitches() {
+        return dbService.getAllSwitches();
+    }
+
+    public void updateSwitch(Switch data) {
+        dbService.sendUpdateSwitch(data);
+    }
+
+    public void deleteSwitch(Switch data) {
+        dbService.sendDeleteSwitch(data);
     }
 
     public void updateValues(Sensor sensor) {

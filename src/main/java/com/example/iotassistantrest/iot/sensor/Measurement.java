@@ -1,6 +1,6 @@
 package com.example.iotassistantrest.iot.sensor;
 
-import com.example.iotassistantrest.config.Unit;
+import com.example.iotassistantrest.iot.config.Unit;
 
 public class Measurement {
     private Unit unit;

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>IOT Assistant</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" type="text/css" media="all" href="../static/css/style.css" th:href="@{/css/style.css}" />
+    </head>
+
+    <body>
+        <h1>Add switch</h1>
+        <object data="../static/images/logo.svg" width="100"></object>
+
+        <form action="#" th:action="@{/addSwitch}" th:object="${switch}" method="post">
+            <label for="id">ID</label>
+            <input type="text" th:field="*{id}" id="id" placeholder="ID">
+            <span th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></span>
+
+            <label for="name">Name</label>
+            <input type="text" th:field="*{name}" id="name" placeholder="Name">
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+
+            <label for="location">Location</label>
+            <input type="text" th:field="*{location}" id="location" placeholder="Location">
+            <span th:if="${#fields.hasErrors('location')}" th:errors="*{location}"></span>
+
+            <label for="localIP">LocalIP</label>
+            <input type="text" th:field="*{localIP}" id="localIP" placeholder="LocalIP">
+            <span th:if="${#fields.hasErrors('localIP')}" th:errors="*{localIP}"></span>
+            <input type="submit" value="Add switch">
+        </form>
+
+    </body>
+</html>
