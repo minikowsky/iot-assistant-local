@@ -24,13 +24,13 @@ class FirebaseFCMHttpClientService {
     private static final String FCM_URL = "https://fcm.googleapis.com/fcm/send";
 
     private final String fcmKey;
-    private final String localServerId;
+    private final String serverId;
 
-    FirebaseFCMHttpClientService(@Value(value = "${local-server.id}") final String localServerId,
+    FirebaseFCMHttpClientService(@Value(value = "${local-server.id}") final String serverId,
                                  @Value(value = "${local-server.fcm-key}") final String fcmKey) {
-        this.localServerId = localServerId;
+        this.serverId = serverId;
         this.fcmKey = fcmKey;
-        log.info("LocalServerId = " + this.localServerId);
+        log.info("LocalServerId = " + this.serverId);
     }
 
     void push(Map<Lang,String> messages, Long sensorId) {
@@ -40,11 +40,11 @@ class FirebaseFCMHttpClientService {
 
     void pushMessage(String message, String lang, Long sensorId) {
         String json = JSONUtils.objectToJson(new MessageBody()
-                                                    .to("/topics/"+ localServerId + "_" + lang)
+                                                    .to("/topics/"+ serverId + "_" + lang)
                                                     .notification(new Notification()
                                                                         .body(message)
                                                                         .title("IOT Assistant"))
-                .data(new Data().sensorId(sensorId).localServerId(localServerId)));
+                .data(new Data().sensorId(sensorId).serverId(serverId)));
         log.info(json);
         try {
             HttpClient httpClient = HttpClient.newHttpClient();
