@@ -10,15 +10,16 @@
 <body>
     <header>
         <div class="navbar">
-            <object data="../../static/images/logo-light.svg" width="100"></object>
+            <img th:src="@{/images/logo-light.svg}" src="../../static/images/logo-light.svg" width="150" height="150" alt="IOT Assistant"/>
             <h1>Admin panel</h1>
         </div>
 
     </header>
     <main>
         <section class="menu">
-            <a href="/config"></a><button>Configuration</button></a>
-            <a href="/switch"></a><button>Switches</button></a>
+            <a class="button" th:href="@{/admin/config}">Configuration</a>
+            <a class="button" th:href="@{/admin/switch}">Switches</a>
+            <a class="button" th:href="@{/logout}">Logout</a>
         </section>
     </main>
 

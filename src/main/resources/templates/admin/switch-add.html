@@ -10,13 +10,13 @@
 <body>
     <header>
         <div class="navbar">
-            <object data="../../static/images/logo-light.svg" width="100"></object>
+            <img th:src="@{/images/logo-light.svg}" src="../../static/images/logo-light.svg" width="150" height="150" alt="IOT Assistant"/>
             <h1>Add switch</h1>
         </div>
 
     </header>
     <main>
-        <form action="#" th:action="@{/addSwitch}" th:object="${switch}" method="post">
+        <form action="#" th:action="@{/admin/addSwitch}" th:object="${switch}" method="post">
             <label for="id">ID</label>
             <input type="text" th:field="*{id}" id="id" placeholder="ID">
             <span th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></span>
@@ -34,8 +34,8 @@
                 <span th:if="${#fields.hasErrors('localIP')}" th:errors="*{localIP}"></span>
                 <input type="submit" class="button" value="Add switch">
             </form>
+            <a class="button" th:href="@{/admin/switch}">Back</a>
         </main>
-        
 
     </body>
 </html>

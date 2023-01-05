@@ -10,19 +10,20 @@
 <body>
     <header>
         <div class="navbar">
-            <object data="../../static/images/logo-light.svg" width="100"></object>
+            <img th:src="@{/images/logo-light.svg}" src="../../static/images/logo-light.svg" width="150" height="150" alt="IOT Assistant"/>
             <h1>Admin panel</h1>
         </div>
 
     </header>
     <main>
-        <form action="#" th:action="@{/updateConfig}" th:object="${config}" method="post">
+        <form action="#" th:action="@{/admin/updateConfig}" th:object="${config}" method="post">
             <label for="localIP">Local IP:</label><input type="text" id="localIP" name="localIP" autofocus="autofocus"
                 th:placeholder="${config.localIP}" /> <br />
             <label for="ssid">SSID:</label><input type="text" id="ssid" name="ssid" th:placeholder="${config.ssid}" />
             <br />
             <input class="button" type="submit" value="Save">
         </form>
+        <a class="button" th:href="@{/}">Back</a>
     </main>
 </body>
 

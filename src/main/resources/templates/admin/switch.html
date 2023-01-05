@@ -10,7 +10,7 @@
 <body>
     <header>
         <div class="navbar">
-            <object data="../../static/images/logo-light.svg" width="100"></object>
+            <img th:src="@{/images/logo-light.svg}" src="../../static/images/logo-light.svg" width="150" height="150" alt="IOT Assistant"/>
             <h1>Admin panel</h1>
         </div>
 
@@ -36,13 +36,15 @@
                             <td th:text="${switch.location}"></td>
                             <td th:text="${switch.localIP}"></td>
                             <td><a class="button button-small"
-                                    th:href="@{/deleteSwitch/{id}(id=${switch.id})}">Delete</a></td>
+                                    th:href="@{/admin/deleteSwitch/{id}(id=${switch.id})}">Delete</a></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <p><a href="/addSwitch" class="button button-small">Add a new switch</a></p>
+            <p><a href="/admin/addSwitch" class="button button-small">Add a new switch</a></p>
         </div>
+
+        <a class="button" th:href="@{/}">Back</a>
     </main>
 
 
