@@ -8,12 +8,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/admin")
 public class SwitchController {
     private final AdminService service;
 
@@ -35,13 +37,13 @@ public class SwitchController {
         }
 
         service.addSwitch(data);
-        return "redirect:/switch";
+        return "redirect:/admin/switch";
     }
 
     @GetMapping("/deleteSwitch/{id}")
     public String deleteSwitch(@PathVariable("id") String id, Model model) {
         Optional<Switch> s = service.findAllSwitches().stream().filter(f -> id.equals(f.getId())).findFirst();
         s.ifPresent(service::deleteSwitch);
-        return "redirect:/switch";
+        return "redirect:/admin/switch";
     }
 }

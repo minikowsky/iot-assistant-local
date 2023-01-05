@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("api/iot") //req: 192.168.0.99:8080/api/iot
+@RequestMapping("/api/iot") //req: 192.168.0.99:8080/api/iot
 @RequiredArgsConstructor
 public class IOTController {
     private final SensorService sensorService;

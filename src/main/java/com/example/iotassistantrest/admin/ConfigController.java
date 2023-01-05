@@ -7,11 +7,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/admin")
 public class ConfigController {
     private final AdminService service;
 
@@ -25,7 +27,7 @@ public class ConfigController {
     public String updateServerConfig(@Valid Config config, BindingResult result, Model model) {
 
         service.updateConfig(config);
-        return "redirect:/config";
+        return "redirect:/admin/config";
 
     }
 

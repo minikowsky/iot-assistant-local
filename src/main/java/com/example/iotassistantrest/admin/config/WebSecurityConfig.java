@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -36,12 +37,6 @@ public class WebSecurityConfig {
                 .roles("ADMIN")
                 .build());
 
-        manager.createUser(User.withUsername("MOBILE")
-                .password("PASS")
-                .passwordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder()::encode)
-                .roles("MOBILE")
-                .build());
-
         return manager;
     }
 
@@ -50,7 +45,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain adminFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .anyRequest().hasRole("ADMIN")
+                        .antMatchers("/","/admin/**").hasRole("ADMIN")
                 )
                 .formLogin(Customizer.withDefaults());
         return http.build();
@@ -59,10 +54,22 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain mobileFilterChain(HttpSecurity http) throws Exception {
         http
+                .antMatcher("/api/mobile/**")
                 .authorizeHttpRequests((requests) -> requests
                         .anyRequest().hasRole("MOBILE")
                 )
                 .httpBasic(Customizer.withDefaults());
+        return http.build();
+    }
+
+    @Bean
+    public SecurityFilterChain iotFilterChain(HttpSecurity http) throws Exception {
+        http
+                .antMatcher("/api/iot/**")
+                .authorizeHttpRequests((requests) -> requests
+                        .anyRequest().authenticated()
+                );
+                //.objectPostProcessor();
         return http.build();
     }
 }
