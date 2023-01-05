@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>IOT Assistant</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link rel="stylesheet" type="text/css" media="all" href="../../static/css/style.css" th:href="@{/css/style.css}" />
-    </head>
 
-    <body>
-        <h1>Admin panel</h1>
-        <object data="../../static/images/logo.svg" width="100"></object>
-        <form action="#" th:action="@{/updateConfig}" th:object="${config}" method="post" >
-            <label for="localIP">Local IP</label>:<input type="text" id="localIP" name="localIP" autofocus="autofocus" th:placeholder="${config.localIP}" /> <br/>
-            <label for="ssid">SSID</label>:<input type="text" id="ssid" name="ssid" th:placeholder="${config.ssid}" /> <br/>
-            <input type="submit" value="Save">
+<head>
+    <title>IOT Assistant</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" media="all" href="../../static/css/style.css" th:href="@{/css/style.css}" />
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <object data="../../static/images/logo-light.svg" width="100"></object>
+            <h1>Admin panel</h1>
+        </div>
+
+    </header>
+    <main>
+        <form action="#" th:action="@{/updateConfig}" th:object="${config}" method="post">
+            <label for="localIP">Local IP:</label><input type="text" id="localIP" name="localIP" autofocus="autofocus"
+                th:placeholder="${config.localIP}" /> <br />
+            <label for="ssid">SSID:</label><input type="text" id="ssid" name="ssid" th:placeholder="${config.ssid}" />
+            <br />
+            <input class="button" type="submit" value="Save">
         </form>
-    </body>
+    </main>
+</body>
+
 </html>

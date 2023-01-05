@@ -1,0 +1,67 @@
+*, *::after, *::before
+    box-sizing: border-box
+    margin: 0
+    padding: 0
+$accentColor: #212325
+$backgroundColor: #E1D5C9
+$buttonsColor: #C49350
+$primaryColor: #F4F0EC
+    
+body
+    background-color: $backgroundColor
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+
+header
+    display: flex
+    justify-content: center
+    .navbar
+        display: flex
+        justify-content: space-evenly
+        align-items: center
+        width: 50%
+        max-width: 400px
+        background-color: $accentColor
+        border-radius: 0  0 25px 25px
+        color: $primaryColor
+main
+    
+    display: flex
+    justify-content: center
+    align-items: center        
+    padding-top: 3%
+    .menu
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: stretch
+    form
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: stretch
+        width: 250px
+        input[type=text]
+            border: none
+            border-radius: 16px
+            height: 30px
+            text-align: center
+            padding-bottom: 5px
+        label
+            padding-bottom: 5px
+        span
+            padding-bottom: 5px
+         
+button, .button
+    padding: 15px
+    margin: 10px
+    font-size: 1.5rem
+    background-color: $buttonsColor
+    color: $accentColor
+    border-radius: 16px
+    border: none
+    box-shadow: 2px 2px 10px 4px rgba(0, 0, 0, 0.15)
+    text-decoration: none
+
+.button-small
+    padding: 10px!important
+    font-size: 1.2rem!important
