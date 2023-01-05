@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>IOT Assistant</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -7,35 +8,45 @@
 </head>
 
 <body>
-<h1>Admin panel</h1>
-<object data="../../static/images/logo.svg" width="100"></object>
-<div th:switch="${switches}">
-    <h2 th:case="null">No users yet!</h2>
-    <div th:case="*">
-        <h2>Users</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Location</th>
-                <th>IP</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="switch : ${switches}">
-                <td th:text="${switch.id}"></td>
-                <td th:text="${switch.name}"></td>
-                <td th:text="${switch.location}"></td>
-                <td th:text="${switch.localIP}"></td>
-                <td><a th:href="@{/deleteSwitch/{id}(id=${switch.id})}">Delete</a></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <p><a href="/addSwitch">Add a new switch</a></p>
-</div>
+    <header>
+        <div class="navbar">
+            <object data="../../static/images/logo-light.svg" width="100"></object>
+            <h1>Admin panel</h1>
+        </div>
+
+    </header>
+    <main>
+        <div th:switch="${switches}">
+            <h2 th:case="null">No users yet!</h2>
+            <div th:case="*">
+                <h2>Users</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Location</th>
+                            <th>IP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="switch : ${switches}">
+                            <td th:text="${switch.id}"></td>
+                            <td th:text="${switch.name}"></td>
+                            <td th:text="${switch.location}"></td>
+                            <td th:text="${switch.localIP}"></td>
+                            <td><a class="button button-small"
+                                    th:href="@{/deleteSwitch/{id}(id=${switch.id})}">Delete</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p><a href="/addSwitch" class="button button-small">Add a new switch</a></p>
+        </div>
+    </main>
+
 
 
 </body>
+
 </html>
