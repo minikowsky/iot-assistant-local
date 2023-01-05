@@ -20,18 +20,18 @@ public class SwitchController {
     @GetMapping("/switch")
     public String findSwitches(Model model) {
         model.addAttribute("switches", service.findAllSwitches());
-        return "switch";
+        return "admin/switch";
     }
 
     @GetMapping("/addSwitch")
     public String showAddSwitch(Switch data) {
-        return "switch-add";
+        return "admin/switch-add";
     }
 
     @PostMapping("/addSwitch")
     public String addSwitch(@Valid Switch data, BindingResult result, Model model ) {
         if(result.hasErrors()) {
-            return "switch-add";
+            return "admin/switch-add";
         }
 
         service.addSwitch(data);

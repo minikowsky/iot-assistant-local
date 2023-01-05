@@ -3,6 +3,7 @@ package com.example.iotassistantrest.admin.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -34,18 +35,33 @@ public class WebSecurityConfig {
                 .passwordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder()::encode)
                 .roles("ADMIN")
                 .build());
+
+        manager.createUser(User.withUsername("MOBILE")
+                .password("PASS")
+                .passwordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder()::encode)
+                .roles("MOBILE")
+                .build());
+
         return manager;
     }
 
     @Bean
-    public SecurityFilterChain apiFilterChain(HttpSecurity http) throws Exception {
+    @Order(1)
+    public SecurityFilterChain adminFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .anyRequest().authenticated()
+                        .anyRequest().hasRole("ADMIN")
                 )
-                //.formLogin(form -> form.loginPage("/login").permitAll());
-                .formLogin(Customizer.withDefaults())
-                .logout(LogoutConfigurer::permitAll)
+                .formLogin(Customizer.withDefaults());
+        return http.build();
+    }
+
+    @Bean
+    public SecurityFilterChain mobileFilterChain(HttpSecurity http) throws Exception {
+        http
+                .authorizeHttpRequests((requests) -> requests
+                        .anyRequest().hasRole("MOBILE")
+                )
                 .httpBasic(Customizer.withDefaults());
         return http.build();
     }

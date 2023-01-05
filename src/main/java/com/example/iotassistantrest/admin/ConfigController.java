@@ -18,7 +18,7 @@ public class ConfigController {
     @GetMapping("/config")
     public String showServerConfig(Model model) {
         model.addAttribute("config", service.getConfig());
-        return "config";
+        return "admin/config";
     }
 
     @PostMapping("/updateConfig")

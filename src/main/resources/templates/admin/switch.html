@@ -3,12 +3,12 @@
 <head>
     <title>IOT Assistant</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" media="all" href="../static/css/style.css" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" type="text/css" media="all" href="../../static/css/style.css" th:href="@{/css/style.css}" />
 </head>
 
 <body>
 <h1>Admin panel</h1>
-<object data="../static/images/logo.svg" width="100"></object>
+<object data="../../static/images/logo.svg" width="100"></object>
 <div th:switch="${switches}">
     <h2 th:case="null">No users yet!</h2>
     <div th:case="*">
