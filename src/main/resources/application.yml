@@ -19,3 +19,12 @@ spring:
     username: ENC(/UQrmWAJ/BKXCGGogAgl/A==)
     embedded-database-connection: h2
     url: "jdbc:h2:./db/data;INIT=RUNSCRIPT FROM 'classpath:create.sql';"
+
+server:
+  port: 8443
+  ssl:
+    enabled: true
+    key-store-type: PKCS12
+    key-store: classpath:keystore/ssl_rootca.p12
+    key-alias: iot-assistant-rest
+    key-store-password: ENC(SJiiNjl5qoduOrJwQoL6RECEn7FkM/oI)

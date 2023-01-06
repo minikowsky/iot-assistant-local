@@ -2,6 +2,7 @@ package com.example.iotassistantrest.admin;
 
 import com.example.iotassistantrest.firebase.body.data.Switch;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +17,7 @@ import java.util.Optional;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/admin")
+@Secured("ROLE_ADMIN")
 public class SwitchController {
     private final AdminService service;
 
@@ -26,7 +28,7 @@ public class SwitchController {
     }
 
     @GetMapping("/addSwitch")
-    public String showAddSwitch(Switch data) {
+    public String showAddSwitch() {
         return "admin/switch-add";
     }
 
@@ -35,7 +37,6 @@ public class SwitchController {
         if(result.hasErrors()) {
             return "admin/switch-add";
         }
-
         service.addSwitch(data);
         return "redirect:/admin/switch";
     }

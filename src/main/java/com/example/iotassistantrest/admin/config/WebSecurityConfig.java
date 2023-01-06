@@ -7,13 +7,11 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.RequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -36,22 +34,22 @@ public class WebSecurityConfig {
                 .passwordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder()::encode)
                 .roles("ADMIN")
                 .build());
-
         return manager;
     }
 
     @Bean
-    @Order(1)
+    @Order(3)
     public SecurityFilterChain adminFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .antMatchers("/","/admin/**").hasRole("ADMIN")
+                        .antMatchers("/admin/**").hasRole("ADMIN")
                 )
                 .formLogin(Customizer.withDefaults());
         return http.build();
     }
 
     @Bean
+    @Order(2)
     public SecurityFilterChain mobileFilterChain(HttpSecurity http) throws Exception {
         http
                 .antMatcher("/api/mobile/**")
@@ -63,11 +61,13 @@ public class WebSecurityConfig {
     }
 
     @Bean
+    @Order(1)
     public SecurityFilterChain iotFilterChain(HttpSecurity http) throws Exception {
         http
                 .antMatcher("/api/iot/**")
+                .csrf().disable()
                 .authorizeHttpRequests((requests) -> requests
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 );
                 //.objectPostProcessor();
         return http.build();

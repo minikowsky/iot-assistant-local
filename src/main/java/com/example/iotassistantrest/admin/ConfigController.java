@@ -2,6 +2,7 @@ package com.example.iotassistantrest.admin;
 
 import com.example.iotassistantrest.firebase.body.data.Config;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +15,7 @@ import javax.validation.Valid;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/admin")
+@Secured("ROLE_ADMIN")
 public class ConfigController {
     private final AdminService service;
 
@@ -25,10 +27,7 @@ public class ConfigController {
 
     @PostMapping("/updateConfig")
     public String updateServerConfig(@Valid Config config, BindingResult result, Model model) {
-
         service.updateConfig(config);
         return "redirect:/admin/config";
-
     }
-
 }
