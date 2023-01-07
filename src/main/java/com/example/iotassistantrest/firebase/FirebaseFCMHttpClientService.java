@@ -4,6 +4,7 @@ import com.example.iotassistantrest.iot.config.Lang;
 import com.example.iotassistantrest.firebase.body.push.Data;
 import com.example.iotassistantrest.firebase.body.push.MessageBody;
 import com.example.iotassistantrest.firebase.body.push.Notification;
+import com.example.iotassistantrest.iot.sensor.MeasurementType;
 import com.example.iotassistantrest.utils.JSONUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,18 +34,21 @@ class FirebaseFCMHttpClientService {
         log.info("LocalServerId = " + this.serverId);
     }
 
-    void push(Map<Lang,String> messages, Long sensorId) {
-        pushMessage(messages.get(Lang.EN), Lang.EN.toString(), sensorId);
-        pushMessage(messages.get(Lang.PL), Lang.PL.toString(), sensorId);
+    void push(Map<Lang,String> messages, Long sensorId, MeasurementType type) {
+        pushMessage(messages.get(Lang.EN), Lang.EN.toString(), sensorId, type);
+        pushMessage(messages.get(Lang.PL), Lang.PL.toString(), sensorId, type);
     }
 
-    void pushMessage(String message, String lang, Long sensorId) {
+    void pushMessage(String message, String lang, Long sensorId, MeasurementType measurementType) {
         String json = JSONUtils.objectToJson(new MessageBody()
                                                     .to("/topics/"+ serverId + "_" + lang)
                                                     .notification(new Notification()
                                                                         .body(message)
                                                                         .title("IOT Assistant"))
-                .data(new Data().sensorId(sensorId).serverId(serverId)));
+                .data(new Data()
+                        .sensorId(sensorId)
+                        .serverId(serverId)
+                        .measurementType(measurementType)));
         log.info(json);
         try {
             HttpClient httpClient = HttpClient.newHttpClient();

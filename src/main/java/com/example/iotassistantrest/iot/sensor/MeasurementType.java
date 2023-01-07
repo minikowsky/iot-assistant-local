@@ -6,6 +6,5 @@ public enum MeasurementType {
     CO2,
     PM1,
     PM25,
-    PM10,
-    MOTION
+    PM10
 }

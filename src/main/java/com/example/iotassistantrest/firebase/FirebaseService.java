@@ -59,7 +59,7 @@ public class FirebaseService {
             default -> null;
         };
         if(messages != null) {
-            fcmService.push(messages, null);
+            fcmService.push(messages, null, null);
             log.info("Push detection: " + messages.get(Lang.EN) + " - has been send");
         } else {
             log.error("There is no messages!");
@@ -76,7 +76,7 @@ public class FirebaseService {
             default -> null;
         };
         if(messages!= null) {
-            fcmService.push(messages, sensorId);
+            fcmService.push(messages, sensorId, type);
             log.info("Push level exceeded: " + messages.get(Lang.EN) + " - has been send");
         } else {
             log.error("There is no messages!");

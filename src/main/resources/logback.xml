@@ -73,7 +73,7 @@
         </encoder>
     </appender>
 
-    <logger level="ERROR" name="com.example.iotassistantrest.firebase" addivity="false">
+    <logger level="INFO" name="com.example.iotassistantrest.firebase" addivity="false">
         <appender-ref ref="CLOUD"/>
     </logger>
     <logger level="DEBUG" name="com.example.iotassistantrest.iot" addivity="false">
