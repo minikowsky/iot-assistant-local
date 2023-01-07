@@ -35,9 +35,12 @@ class FirebaseDBHttpClientService {
     private static final String METHOD_DELETE = "DELETE";
 
     private final String localServerId;
+    private final String firebaseToken;
 
-    FirebaseDBHttpClientService(@Value(value = "${local-server.id}") final String localServerId) {
+    FirebaseDBHttpClientService(@Value(value = "${local-server.id}") final String localServerId,
+                                final String firebaseToken) {
         this.localServerId = localServerId;
+        this.firebaseToken = firebaseToken;
         log.info("LocalServerId = " + this.localServerId);
     }
 
@@ -127,7 +130,7 @@ class FirebaseDBHttpClientService {
         try {
             HttpClient httpClient = HttpClient.newHttpClient();
             HttpRequest httpRequest = HttpRequest.newBuilder()
-                    .header("Content-Type", "application/json")
+                    .headers("Content-Type","application/json", "Authorization", "Bearer "+ firebaseToken)
                     .uri(new URI(uri))
                     .method(method, HttpRequest.BodyPublishers.ofString(body))
                     .build();
@@ -145,7 +148,7 @@ class FirebaseDBHttpClientService {
         try {
             HttpClient httpClient = HttpClient.newHttpClient();
             HttpRequest httpRequest = HttpRequest.newBuilder()
-                    .header("Content-Type", "application/json")
+                    .headers("Content-Type","application/json", "Authorization", "Bearer "+ firebaseToken)
                     .uri(new URI(uri))
                     .GET().build();
 

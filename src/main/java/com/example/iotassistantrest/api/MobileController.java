@@ -13,12 +13,8 @@ public class MobileController {
 
     @PostMapping(value = "/light/{id}/{mode}")
     public HttpStatus switchLight(@PathVariable("id") String id, @PathVariable("mode") String mode) {
-        String devAddr = service.findDevice(id);
-        if(devAddr == null) {
-            return HttpStatus.BAD_REQUEST;
-        }
         try {
-            service.switchLight(devAddr, mode.toLowerCase());
+            service.switchLight(id, mode.toLowerCase());
             return HttpStatus.OK;
         } catch (Exception e) {
             return HttpStatus.INTERNAL_SERVER_ERROR;

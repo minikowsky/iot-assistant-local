@@ -8,4 +8,5 @@ public class Switch {
     private String name;
     private String location;
     private String localIP;
+    private String mode;
 }

@@ -1,5 +1,6 @@
 package com.example.iotassistantrest.iot.controller;
 
+import com.example.iotassistantrest.firebase.FirebaseService;
 import com.example.iotassistantrest.utils.JSONUtils;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -18,12 +19,6 @@ import java.util.Optional;
 public class SonoffService {
     private static final Logger log = LoggerFactory.getLogger(SonoffService.class);
     private static final String SONOFF_URL = "http://%s:8081/zeroconf/switch";
-
-    private final SonoffRepository repository;
-    public String findDevice(String id) {
-        Optional<Sonoff> sonoff = repository.findById(id);
-        return sonoff.map(Sonoff::getDeviceLocalAddr).orElse(null);
-    }
 
     public void switchLight(String devAddr, String mode) {
         String json = "{\"data\":{\"switch\":\"" + mode + "\"}}";

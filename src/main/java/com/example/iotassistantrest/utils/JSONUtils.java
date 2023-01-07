@@ -38,6 +38,15 @@ public class JSONUtils {
         }
     }
 
+    public static Map<String,String> jsonToMap(String body) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.readValue(body, new TypeReference<Map<String,String>>() {});
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static Map<String,Switch> jsonToSwitches(String body) {
         ObjectMapper mapper = new ObjectMapper();
         try {
