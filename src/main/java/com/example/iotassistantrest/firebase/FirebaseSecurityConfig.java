@@ -19,7 +19,7 @@ public class FirebaseSecurityConfig {
     final Resource file;
 
     public FirebaseSecurityConfig(
-            @Value("classpath:keystore/iot-assistant-81581-firebase-adminsdk-zsdw8-5f4cdc1b26.json") Resource file) {
+            @Value("classpath:keystore/iot-assistant-81581-firebase-adminsdk-zsdw8-7bd502512f.json") Resource file) {
         this.file = file;
     }
 

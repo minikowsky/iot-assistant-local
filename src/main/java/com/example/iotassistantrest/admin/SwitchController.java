@@ -28,7 +28,7 @@ public class SwitchController {
     }
 
     @GetMapping("/addSwitch")
-    public String showAddSwitch() {
+    public String showAddSwitch(Switch data) {
         return "admin/switch-add";
     }
 

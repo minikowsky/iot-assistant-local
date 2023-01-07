@@ -32,6 +32,7 @@
                 <label for="localIP">LocalIP:</label>
                 <input type="text" th:field="*{localIP}" id="localIP" placeholder="LocalIP">
                 <span th:if="${#fields.hasErrors('localIP')}" th:errors="*{localIP}"></span>
+
                 <input type="submit" class="button" value="Add switch">
             </form>
             <a class="button" th:href="@{/admin/switch}">Back</a>
