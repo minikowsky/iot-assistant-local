@@ -11,7 +11,6 @@ String id = "1";
 const char* ssid = "";
 const char* password = "";
 
-//const char* serverAddress = "http://192.168.0.99:8080/api/iot/sensor";
 const char* serverAddress = "https://192.168.1.106:8443/api/iot/sensor";
 
 DHT dht(DHTPIN, DHTTYPE);
