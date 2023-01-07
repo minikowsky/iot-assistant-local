@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +19,8 @@ public class AdminService {
     }
 
     List<Switch> findAllSwitches() {
-        return service.findAllSwitches().values().stream().toList();
+        Map<String, Switch> map = service.findAllSwitches();
+        return map == null ? null : map.values().stream().toList();
     }
 
     public void addSwitch(Switch data) {
