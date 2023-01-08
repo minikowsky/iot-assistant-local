@@ -37,6 +37,7 @@ public class SwitchController {
         if(result.hasErrors()) {
             return "admin/switch-add";
         }
+        data.setMode("off");
         service.addSwitch(data);
         return "redirect:/admin/switch";
     }

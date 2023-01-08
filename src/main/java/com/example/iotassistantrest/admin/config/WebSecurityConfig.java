@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -13,7 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
+
 
 @Configuration
 @EnableWebSecurity
@@ -43,6 +43,7 @@ public class WebSecurityConfig {
     @Order(3)
     public SecurityFilterChain adminFilterChain(HttpSecurity http) throws Exception {
         http
+                //.antMatcher("/admin/**") // <- causes 404 while redirect to /login
                 .authorizeHttpRequests((requests) -> requests
                         .antMatchers("/admin/**").hasRole("ADMIN")
                 )
@@ -55,11 +56,11 @@ public class WebSecurityConfig {
     public SecurityFilterChain mobileFilterChain(HttpSecurity http) throws Exception {
         http
                 .antMatcher("/api/mobile/**")
-                .addFilterBefore(new MobileTokenFilter(), BasicAuthenticationFilter.class)
+                .csrf().disable()
+                .addFilterBefore(new MobileTokenFilter(), AnonymousAuthenticationFilter.class )
                 .authorizeHttpRequests((requests) -> requests
                         .anyRequest().permitAll()
-                )
-                .httpBasic(Customizer.withDefaults());
+                );
         return http.build();
     }
 

@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/mobile") //req: 192.168.0.99:8181/api/iot
+@RequestMapping("/api/mobile") //req: 192.168.0.99:8443/api/iot
 @RequiredArgsConstructor
 public class MobileController {
     private final SwitchService service;
@@ -23,8 +23,9 @@ public class MobileController {
 
 
     @PostMapping(value = "/alarm/{mode}")
-    public void switchAlarm(@PathVariable("mode") String mode) {
+    public HttpStatus switchAlarm(@PathVariable("mode") String mode) {
         service.switchAlarm(mode.toLowerCase());
+        return HttpStatus.OK;
     }
 
     @GetMapping(value = "/alarm")
