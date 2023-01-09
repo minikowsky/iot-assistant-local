@@ -4,12 +4,6 @@ create table IF NOT EXISTS LASTPUSH (
                           PRIMARY KEY (PUSH_TYPE)
 );
 
-create table IF NOT EXISTS SONOFF (
-                        DEVICE_ID varchar2 ,
-                        LOCAL_ADDR varchar2,
-                        PRIMARY KEY (DEVICE_ID)
-) as select '10015a83ac' as DEVICE_ID, '192.168.1.100' as LOCAL_ADDR;
-
 create table IF NOT EXISTS ALARM (
                        ID TINYINT not null DEFAULT 1,
                        MODE varchar2,
