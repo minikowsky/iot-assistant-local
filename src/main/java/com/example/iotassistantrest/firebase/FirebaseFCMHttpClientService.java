@@ -24,13 +24,10 @@ class FirebaseFCMHttpClientService {
 
     private static final String FCM_URL = "https://fcm.googleapis.com/fcm/send";
 
-    private final String firebaseToken;
     private final String serverId;
 
-    FirebaseFCMHttpClientService(@Value(value = "${local-server.id}") final String serverId,
-                                 final String firebaseToken) {
+    FirebaseFCMHttpClientService(@Value(value = "${local-server.id}") final String serverId) {
         this.serverId = serverId;
-        this.firebaseToken = firebaseToken;
         log.info("LocalServerId = " + this.serverId);
     }
 
@@ -53,7 +50,8 @@ class FirebaseFCMHttpClientService {
         try {
             HttpClient httpClient = HttpClient.newHttpClient();
             HttpRequest httpRequest = HttpRequest.newBuilder()
-                    .headers("Content-Type","application/json", "Authorization", "Bearer "+ firebaseToken)
+                    .headers("Content-Type","application/json",
+                            "Authorization", "Bearer "+ FirebaseSecurityConfig.getFirebaseToken())
                     .uri(new URI(FCM_URL))
                     .POST( HttpRequest.BodyPublishers.ofString(json))
                     .build();
