@@ -4,11 +4,11 @@ import com.example.iotassistantrest.iot.sensor.MeasurementType;
 
 @lombok.Data
 public class Data {
-    private Long sensorId;
+    private String sensorId;
     private String serverId;
-    private MeasurementType measurementType;
+    private String measurementType;
 
-    public Data sensorId(Long sensorId) {
+    public Data sensorId(String sensorId) {
         this.sensorId = sensorId;
         return this;
     }
@@ -18,7 +18,7 @@ public class Data {
         return this;
     }
 
-    public Data measurementType(MeasurementType measurementType) {
+    public Data measurementType(String measurementType) {
         this.measurementType = measurementType;
         return this;
     }

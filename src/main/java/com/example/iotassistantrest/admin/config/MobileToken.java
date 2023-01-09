@@ -27,13 +27,6 @@ public record MobileToken(String value) {
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        /*JsonObject payloadAsJson = getPayloadAsJsonObject();
-
-        return StreamSupport.stream(
-                        payloadAsJson.getAsJsonObject("realm_access").getAsJsonArray("roles").spliterator(), false)
-                .map(JsonElement::getAsString)
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());*/
         return Collections.emptyList();
     }
 

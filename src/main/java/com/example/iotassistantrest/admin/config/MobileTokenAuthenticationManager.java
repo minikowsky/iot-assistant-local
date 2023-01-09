@@ -15,8 +15,6 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.security.KeyFactory;
-import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
@@ -37,7 +35,6 @@ public class MobileTokenAuthenticationManager implements AuthenticationManager {
         String signature = chunks[2];
 
         try {
-            KeyFactory kf = KeyFactory.getInstance("RSA");
             CertificateFactory cf = CertificateFactory.getInstance("X.509");
             X509Certificate certificate = (X509Certificate) cf.generateCertificate(new ByteArrayInputStream(getKey(kid)));
             PublicKey pk = certificate.getPublicKey();
@@ -48,7 +45,7 @@ public class MobileTokenAuthenticationManager implements AuthenticationManager {
                 log.error("Token is invalid!!");
                 throw new BadCredentialsException("Invalid token");
             }
-        } catch (NoSuchAlgorithmException | CertificateException e) {
+        } catch (CertificateException e) {
             throw new RuntimeException(e);
         }
         return authentication;

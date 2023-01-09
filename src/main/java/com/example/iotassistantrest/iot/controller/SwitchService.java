@@ -28,7 +28,7 @@ public class SwitchService {
         }
         if(Objects.equals(mode, "on") || Objects.equals(mode, "off")) {
             s.setMode(mode);
-            sonoffService.switchLight(s.getLocation(), mode);
+            sonoffService.switchLight(s.getLocalIP(), mode);
             firebaseService.updateSwitch(s);
         } else {
             log.error("Unknown mode");
@@ -47,7 +47,7 @@ public class SwitchService {
             log.error("Unknown alarm mode");
         }
     }
-    //TODO: Delete
+
     public boolean getAlarm() {
         return alarmService.isAlarmOn();
     }

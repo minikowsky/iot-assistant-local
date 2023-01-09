@@ -18,9 +18,10 @@ public class FirebaseSecurityConfig {
     public static String getFirebaseToken() {
         try {
             GoogleCredentials googleCredentials = GoogleCredentials.fromStream(file.getInputStream()).createScoped(
-                    Arrays.asList("https://www.googleapis.com/auth/firebase.messaging",
-                    "https://www.googleapis.com/auth/userinfo.email",
-                    "https://www.googleapis.com/auth/firebase.database")
+                    Arrays.asList(
+                            "https://www.googleapis.com/auth/firebase.messaging",
+                            "https://www.googleapis.com/auth/userinfo.email",
+                            "https://www.googleapis.com/auth/firebase.database")
             );
             googleCredentials.refreshIfExpired();
             return googleCredentials.getAccessToken().getTokenValue();

@@ -4,12 +4,12 @@ import lombok.Data;
 
 @Data
 public class MessageBody {
-    private String to;
+    private String topic;
     private Notification notification;
     private com.example.iotassistantrest.firebase.body.push.Data data;
 
-    public MessageBody to(String to) {
-        this.to = to;
+    public MessageBody topic(String topic) {
+        this.topic = topic;
         return this;
     }
 

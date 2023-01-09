@@ -4,12 +4,12 @@ local-server:
 
 push: # time between sending alert messages
   level-exceeded:
-    pm1: 60
-    pm25: 60
-    pm10: 60
-    co2: 30
+    pm1: 2
+    pm25: 2
+    pm10: 2
+    co2: 2
   detection:
-    motion: 5
+    motion: 1
 
 spring:
   datasource:

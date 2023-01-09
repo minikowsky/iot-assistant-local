@@ -127,8 +127,8 @@ class FirebaseDBHttpClientService {
         try {
             HttpClient httpClient = HttpClient.newHttpClient();
             HttpRequest httpRequest = HttpRequest.newBuilder()
-                    .headers("Content-Type","application/json", "Authorization",
-                            "Bearer "+ FirebaseSecurityConfig.getFirebaseToken())
+                    .headers("Content-Type","application/json",
+                            "Authorization", "Bearer "+ FirebaseSecurityConfig.getFirebaseToken())
                     .uri(new URI(uri))
                     .method(method, HttpRequest.BodyPublishers.ofString(body))
                     .build();
@@ -146,8 +146,8 @@ class FirebaseDBHttpClientService {
         try {
             HttpClient httpClient = HttpClient.newHttpClient();
             HttpRequest httpRequest = HttpRequest.newBuilder()
-                    .headers("Content-Type","application/json", "Authorization",
-                            "Bearer "+ FirebaseSecurityConfig.getFirebaseToken())
+                    .headers("Content-Type","application/json",
+                            "Authorization", "Bearer "+ FirebaseSecurityConfig.getFirebaseToken())
                     .uri(new URI(uri))
                     .GET().build();
 
