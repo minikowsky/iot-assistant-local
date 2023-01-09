@@ -55,22 +55,4 @@ public class JSONUtils {
             throw new RuntimeException(e);
         }
     }
-
-/*    public static List<Switch> jsonToListSwitches(String body) {
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            return mapper.readValue(body, Config.class);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-    }*/
-
-    /*public static <T> Class<T> jsonToObject(String json, Class<T> c) {
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            return (Class<T>) mapper.readValue(json, c);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-    }*/
 }

@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 @Getter
 public abstract class Device {
     @NotNull
-    private Long id;
+    private String id;
     @NotNull
     private String location;
     private final Timestamp timestamp;
@@ -17,7 +17,7 @@ public abstract class Device {
         this.timestamp = new Timestamp(System.currentTimeMillis());
     }
 
-    public Device id(Long id) {
+    public Device id(String id) {
         this.id = id;
         return this;
     }

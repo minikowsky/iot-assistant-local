@@ -11,12 +11,12 @@ import java.util.Map;
 
 @Data
 public class Device {
-    private Long id;
+    private String id;
     private String location;
     private SensorType sensorType;
     private Current current;
 
-    Device(Long id, String location, SensorType sensorType) {
+    Device(String id, String location, SensorType sensorType) {
         this.id = id;
         this.location = location;
         this.sensorType = sensorType;

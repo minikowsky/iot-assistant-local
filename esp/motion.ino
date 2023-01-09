@@ -1,12 +1,12 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
 
-String id = "1";
+String id = "motion1";
 
 const char* ssid = "";
 const char* password = "";
 
-const char* serverAddress = "https://192.168.1.106:8443/api/iot/detector";
+const char* serverAddress = "https://192.168.0.99:8443/api/iot/detector";
 
 const int PIN_TO_SENSOR = 15; // GIOP19 pin connected to OUTPUT pin of sensor
 int pinStateCurrent   = LOW;  // current state of pin
@@ -72,7 +72,7 @@ void sendHttpRequest(String json) {
 
 
 String getMotionJson() {
-     String httpRequestData = "{\"id\":" + id + ","
+     String httpRequestData = "{\"id\":\"" + id + "\","
                                 "\"location\":\"Living room\","+
                                 "\"detectorType\":\"MOTION\"}";
     return httpRequestData;

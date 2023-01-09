@@ -6,17 +6,16 @@
 #define DHTPIN 15
 #define DHTTYPE DHT11
 
-String id = "1";
+String id = "temp1";
 
 const char* ssid = "";
 const char* password = "";
 
-const char* serverAddress = "https://192.168.1.106:8443/api/iot/sensor";
+const char* serverAddress = "https://192.168.0.99:8443/api/iot/sensor";
 
 DHT dht(DHTPIN, DHTTYPE);
 
 void connectToLAN() {
-  //WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
   Serial.println("Connecting");
   while(WiFi.status() != WL_CONNECTED) {
@@ -40,7 +39,7 @@ void setup() {
 
 void loop() {
   // Wait a minute between measurements.
-  delay(10000);
+  delay(59500);
 
   float h = dht.readHumidity();
   float t = dht.readTemperature();
@@ -64,7 +63,6 @@ void sendHttpRequest(String json) {
   if(WiFi.status()== WL_CONNECTED){
     WiFiClientSecure client;
     client.setInsecure();
-
     HTTPClient https;
 
     https.begin(client, serverAddress);
@@ -85,8 +83,8 @@ void sendHttpRequest(String json) {
 }
 
 String getDHTJson(float t, float h) {
-     String httpRequestData = "{\"id\":" + id +
-                               ",\"values\":{\"TEMPERATURE\":{\"value\":" + String(t) +
+     String httpRequestData = "{\"id\":\"" + id + "\","
+                               "\"values\":{\"TEMPERATURE\":{\"value\":" + String(t) +
                                                            ",\"unit\":\"CELSIUS\"},"+
                                            "\"HUMIDITY\":{\"value\":"+ String(h) +
                                                           ",\"unit\":\"PERCENT\"}}," +

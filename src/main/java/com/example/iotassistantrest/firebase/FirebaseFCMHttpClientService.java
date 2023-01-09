@@ -33,13 +33,13 @@ class FirebaseFCMHttpClientService {
         log.info("LocalServerId = " + this.serverId);
     }
 
-    void push(Map<Lang,String> messages, Long sensorId, MeasurementType type) {
+    void push(Map<Lang,String> messages, String sensorId, String type) {
         pushMessage(messages.get(Lang.EN), Lang.EN.toString(), sensorId, type);
         pushMessage(messages.get(Lang.PL), Lang.PL.toString(), sensorId, type);
     }
 
-    void pushMessage(String message, String lang, Long sensorId, MeasurementType measurementType) {
-        String json = JSONUtils.objectToJson(getMessage(lang, message, sensorId.toString(), measurementType.toString()));
+    void pushMessage(String message, String lang, String sensorId, String measurementType) {
+        String json = JSONUtils.objectToJson(getMessage(lang, message, sensorId, measurementType));
         log.info(json);
         try {
             HttpClient httpClient = HttpClient.newHttpClient();

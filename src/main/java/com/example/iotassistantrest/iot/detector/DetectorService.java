@@ -41,6 +41,8 @@ public class DetectorService {
             if(lastPushService.shouldPush(type.toString(), pushMotion)) {
                 firebaseService.pushDetection(type, location);
             }
+        } else {
+            log.info("Alarm is off");
         }
     }
 }

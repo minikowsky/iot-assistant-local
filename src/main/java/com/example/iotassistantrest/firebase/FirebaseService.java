@@ -67,7 +67,7 @@ public class FirebaseService {
 
     }
 
-    public void pushLevelExceeded(Long sensorId, MeasurementType type, Double value) {
+    public void pushLevelExceeded(String sensorId, MeasurementType type, Double value) {
         Map<Lang,String> messages = switch(type){
             case PM1 -> Message.getMessage(Message.HIGH_LEVEL_PM1, value, Unit.MICROGRAMS_PER_CUBIC_METER.getSymbol());
             case PM25 -> Message.getMessage(Message.HIGH_LEVEL_PM25, value, Unit.MICROGRAMS_PER_CUBIC_METER.getSymbol());
@@ -76,7 +76,7 @@ public class FirebaseService {
             default -> null;
         };
         if(messages!= null) {
-            fcmService.push(messages, sensorId, type);
+            fcmService.push(messages, sensorId, type.toString());
             log.info("Push level exceeded: " + messages.get(Lang.EN) + " - has been send");
         } else {
             log.error("There is no messages!");

@@ -3,18 +3,18 @@
 #include "PMS.h"
 #include <SoftwareSerial.h>
 
-String smog_id = "2";
+String smog_id = "smog1";
 
 const char* ssid = "";
 const char* password = "";
-const char* serverAddress = "https://192.168.1.106:8443/api/iot/sensor";
+const char* serverAddress = "https://192.168.0.99:8443/api/iot/sensor";
+
 
 SoftwareSerial pmsSerial(D2, D3); //TX, RX
 PMS pms(pmsSerial);
 PMS::DATA psmData;
 
 void connectToLAN() {
-  delay(6000); // Wait for a second
   WiFi.begin(ssid, password);
   Serial.println("Connecting");
   delay(1000); // Wait for two seconds
@@ -92,8 +92,8 @@ void sendHttpRequest(String json) {
 }
 
 String getPMSJson(float pm1, float pm25, float pm10) {
-     String httpRequestData = "{\"id\":" + smog_id +
-                               ",\"values\":{\"PM1\":{\"value\":" + String(pm1) +
+     String httpRequestData = "{\"id\":\"" + smog_id +"\","+
+                               "\"values\":{\"PM1\":{\"value\":" + String(pm1) +
                                                            ",\"unit\":\"MICROGRAMS_PER_CUBIC_METER\"},"+
                                            "\"PM25\":{\"value\":"+ String(pm25) +
                                                           ",\"unit\":\"MICROGRAMS_PER_CUBIC_METER\"}," +
