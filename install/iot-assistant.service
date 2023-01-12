@@ -1,0 +1,7 @@
+[Unit]
+Description=Iot assistant REST API application
+[Service]
+ExecStart=/usr/bin/java -jar -Djasypt.encryptor.password=DEV /iot-assistant-rest/iot-assistant-rest.jar
+SuccessExitStatus=143
+[Install]
+WantedBy=multi-user.target
