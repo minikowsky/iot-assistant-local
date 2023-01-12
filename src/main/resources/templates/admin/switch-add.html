@@ -16,6 +16,8 @@
 
     </header>
     <main>
+        <h2>New Switch</h2>
+        <br/>
         <form action="#" th:action="@{/admin/addSwitch}" th:object="${switch}" method="post">
             <label for="id">ID</label>
             <input type="text" th:field="*{id}" id="id" placeholder="ID">

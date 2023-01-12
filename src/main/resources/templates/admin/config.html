@@ -16,6 +16,8 @@
 
     </header>
     <main>
+        <h2>Configuration</h2>
+        <br/>
         <form action="#" th:action="@{/admin/updateConfig}" th:object="${config}" method="post">
             <label for="localIP">Local IP:</label><input type="text" id="localIP" name="localIP" autofocus="autofocus"
                 th:placeholder="${config.localIP}" /> <br />
