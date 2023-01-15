@@ -4,10 +4,10 @@ local-server:
 
 push: # time between sending alert messages
   level-exceeded:
-    pm1: 2
-    pm25: 2
-    pm10: 2
-    co2: 2
+    pm1: 30
+    pm25: 30
+    pm10: 30
+    co2: 15
   detection:
     motion: 1
 

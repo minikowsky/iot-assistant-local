@@ -43,7 +43,6 @@ public class WebSecurityConfig {
     @Order(3)
     public SecurityFilterChain adminFilterChain(HttpSecurity http) throws Exception {
         http
-                //.antMatcher("/admin/**") // <- causes 404 while redirect to /login
                 .authorizeHttpRequests((requests) -> requests
                         .antMatchers("/admin/**").hasRole("ADMIN")
                 )

@@ -13,7 +13,7 @@ public class AlarmService {
     private static final Logger log = LoggerFactory.getLogger(AlarmService.class);
     private final AlarmRepository repository;
 
-    //TODO: Temporary
+
     public boolean isAlarmOn() {
         Optional<Alarm> alarm = repository.findById(1);
         if(alarm.isEmpty()) {
